@@ -46,6 +46,11 @@ class InstallerTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $filesystem = new Filesystem();
+        $filesystem->chmod($this->tempDir, 0777, 0000, true);
+        $filesystem->remove($this->homeDir);
+        $filesystem->chmod($this->rootDir .'/puli.phar', 0777, 0000, false);
+        $filesystem->remove($this->rootDir .'/puli.phar');
+        $filesystem->remove($this->rootDir);
         $filesystem->remove($this->tempDir);
 
         putenv('PULI_HOME');
